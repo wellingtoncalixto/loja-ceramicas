@@ -1,0 +1,56 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+// Todo o menu móvel some a partir de md.
+.menu {
+  @include m.md {
+    display: none;
+  }
+}
+
+.botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: t.$alvo-toque;
+  height: t.$alvo-toque;
+  margin-left: t.espaco(-2);
+  border-radius: t.$raio-md;
+  color: t.$texto;
+
+  @include m.hover {
+    color: t.$roxo;
+  }
+}
+
+.icone {
+  width: t.espaco(6);
+  height: t.espaco(6);
+}
+
+// Painel aberto logo abaixo do header (fechado pelo atributo hidden).
+.painel {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  z-index: 20;
+  padding-block: t.espaco(2);
+  border-bottom: t.$espessura-borda solid t.$borda;
+  background-color: t.$fundo;
+  box-shadow: t.$sombra-md;
+}
+
+.localizacao {
+  display: flex;
+  align-items: center;
+  gap: t.espaco(2);
+  margin-top: t.espaco(2);
+  padding: t.espaco(3) t.espaco(4) t.espaco(2);
+  border-top: t.$espessura-borda solid t.$borda;
+  color: t.$texto-suave;
+}
+
+.iconeLocalizacao {
+  width: t.espaco(4);
+  height: t.espaco(4);
+}

@@ -1,0 +1,50 @@
+// Tokens de design da Loja Rossi: mude aqui para mudar em todo o site.
+@use "sass:math";
+
+// Cores (fundo sempre claro, sem modo escuro automático).
+$fundo: #ffffff;
+$creme: #fbf8f5;
+$texto: #2e2a2c;
+$texto-suave: #57525a;
+$borda: #e4e1e8;
+$roxo: #6a5279;
+$roxo-escuro: #564266;
+$lavanda: #7c6cc9;
+$branco: #ffffff;
+
+// Fontes: as variáveis CSS vêm do next/font (layout.tsx).
+$fonte-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+$fonte-serif: var(--font-lora), Georgia, "Times New Roman", serif;
+
+// Tamanhos de texto: (tamanho, altura da linha).
+$textos: (
+  xs: (0.75rem, math.div(1, 0.75)),
+  sm: (0.875rem, math.div(1.25, 0.875)),
+  base: (1rem, 1.5),
+  lg: (1.125rem, math.div(1.75, 1.125)),
+);
+$peso-semibold: 600;
+// Tamanhos avulsos fora da escala, usados em mais de um componente.
+$texto-medio: 1.0625rem; // 17px: subtítulo do Hero (desktop), menu e botão de orçamento
+$texto-apoio: 0.95rem; // ~15px: link secundário do Hero e localização do header
+
+// Espaçamento: espaco(4) = 1rem.
+@function espaco($n) {
+  @return $n * 0.25rem;
+}
+
+// Medidas gerais.
+$largura-max: 72rem;
+$raio: 0.25rem;
+$raio-md: 0.375rem;
+$raio-redondo: 9999px;
+$alvo-toque: espaco(11); // 44px
+$icone: 22px; // ícones do header (busca e orçamento)
+$espessura-borda: 1px; // bordas e divisores finos
+$espessura-destaque: 2px; // marcador da aba ativa e contorno de foco
+$sombra-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+// Breakpoints (mobile first: o estilo base é o do celular).
+$bp-sm: 40rem; // 640px
+$bp-md: 48rem; // 768px
+$bp-lg: 64rem; // 1024px

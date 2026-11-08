@@ -1,0 +1,67 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+// A aba ativa é marcada no HTML com aria-current="page" e estilizada por ele.
+
+// Versão desktop: links lado a lado, ativo sublinhado.
+.listaDesktop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: t.espaco(8);
+
+  @include m.lg {
+    gap: t.espaco(12);
+  }
+}
+
+.linkDesktop {
+  @include m.transicao-cores;
+  display: inline-block;
+  padding-block: t.espaco(3);
+  border-bottom: t.$espessura-destaque solid transparent;
+  font-size: t.$texto-medio;
+  color: t.$texto;
+
+  @include m.hover {
+    color: t.$roxo;
+  }
+
+  &[aria-current="page"] {
+    border-color: t.$roxo;
+    font-weight: t.$peso-semibold;
+    color: t.$roxo;
+  }
+}
+
+// Versão celular: links empilhados, ativo com barra à esquerda.
+.listaMobile {
+  display: flex;
+  flex-direction: column;
+}
+
+.linkMobile {
+  @include m.texto(lg);
+  @include m.transicao-cores;
+  display: block;
+  padding: t.espaco(3) t.espaco(4);
+  border-left: t.$espessura-destaque solid transparent;
+  color: t.$texto;
+
+  @include m.hover {
+    background-color: t.$creme;
+    color: t.$roxo;
+  }
+
+  // O link ocupa a largura toda do painel: contorno para dentro, senão é cortado nas laterais.
+  // ":root" vence a regra global de foco em globals.scss.
+  :root &:focus-visible {
+    outline-offset: -(t.$espessura-destaque);
+  }
+
+  &[aria-current="page"] {
+    border-color: t.$roxo;
+    font-weight: t.$peso-semibold;
+    color: t.$roxo;
+  }
+}

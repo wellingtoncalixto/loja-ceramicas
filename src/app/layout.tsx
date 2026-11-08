@@ -1,29 +1,44 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Lora, Source_Sans_3 } from "next/font/google";
+import "./globals.scss";
+import { Header } from "@/components/layout/Header/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const sourceSans = Source_Sans_3({
+  variable: "--font-source-sans",
   subsets: ["latin"],
 });
+
+const siteTitle = "Loja Rossi — Porcelanas e faianças em Pedreira, SP";
+const siteDescription =
+  "Porcelanas e faianças da Loja Rossi, em Pedreira, SP. Kits para bebê, lavabo, mesa posta e cozinha: escolha peças, cores e estampas e monte do seu jeito.";
 
 export const metadata: Metadata = {
-  title: "Loja Rossi",
-  description: "Loja Rossi — cerâmicas",
+  title: {
+    default: siteTitle,
+    template: "%s | Loja Rossi",
+  },
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Loja Rossi",
+    title: siteTitle,
+    description: siteDescription,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="pt-BR"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="pt-BR" className={`${lora.variable} ${sourceSans.variable}`}>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,7 +1,10 @@
+import { Hero } from "@/components/home/Hero/Hero";
+import styles from "./page.module.scss";
+
 export default function Home() {
   return (
-    <main className="flex flex-1 items-center justify-center">
-      <h1 className="text-2xl font-semibold">Loja Rossi — em construção</h1>
+    <main id="conteudo" className={styles.conteudo}>
+      <Hero />
     </main>
   );
 }

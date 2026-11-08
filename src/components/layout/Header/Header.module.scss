@@ -1,0 +1,185 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+.header {
+  position: relative;
+  border-bottom: t.$espessura-borda solid t.$borda;
+  background-color: t.$fundo;
+}
+
+// "Pular para o conteúdo": invisível até receber foco pelo teclado.
+.pularConteudo {
+  @include m.so-leitor-de-tela;
+
+  &:focus {
+    @include m.mostrar-leitor-de-tela;
+    position: absolute;
+    top: t.espaco(2);
+    left: t.espaco(2);
+    z-index: 30;
+    padding: t.espaco(2) t.espaco(3);
+    background-color: t.$roxo;
+    color: t.$branco;
+  }
+}
+
+// Linha de cima: esquerda | logo | direita.
+.barra {
+  @include m.container;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: t.espaco(2);
+  padding: t.espaco(2) t.espaco(4);
+
+  @include m.md {
+    padding: t.espaco(3) t.espaco(8) t.espaco(1);
+  }
+}
+
+.esquerda {
+  display: flex;
+  align-items: center;
+}
+
+// Localização: só a partir de md (no celular fica dentro do menu).
+.localizacao {
+  display: none;
+  align-items: center;
+  gap: t.espaco(2);
+  font-size: t.$texto-apoio;
+  color: t.$texto;
+
+  @include m.md {
+    display: flex;
+  }
+}
+
+.iconeLocalizacao {
+  width: 18px;
+  height: 18px;
+  color: t.$texto-suave;
+}
+
+.logoLink {
+  display: block;
+  border-radius: t.$raio-redondo;
+}
+
+.logo {
+  width: 108px;
+  height: auto;
+
+  @include m.md {
+    width: 180px;
+  }
+
+  @include m.lg {
+    width: 220px;
+  }
+}
+
+.direita {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: t.espaco(1);
+
+  @include m.md {
+    gap: t.espaco(4);
+  }
+}
+
+.busca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: t.$alvo-toque;
+  height: t.$alvo-toque;
+  border-radius: t.$raio-md;
+  color: t.$texto;
+
+  @include m.hover {
+    color: t.$roxo;
+  }
+}
+
+.icone {
+  width: t.$icone;
+  height: t.$icone;
+}
+
+.divisor {
+  display: none;
+  width: t.$espessura-borda;
+  height: t.espaco(6);
+  background-color: t.$borda;
+
+  @include m.md {
+    display: block;
+  }
+}
+
+// Orçamento: ícone + número no celular; botão roxo a partir de md.
+.orcamento {
+  display: flex;
+  align-items: center;
+  gap: t.espaco(1.5);
+  height: t.$alvo-toque;
+  padding-inline: t.espaco(2);
+  border-radius: t.$raio-md;
+  color: t.$roxo;
+
+  @include m.hover {
+    color: t.$roxo-escuro;
+  }
+
+  @include m.md {
+    padding-inline: t.espaco(4);
+    background-color: t.$roxo;
+    color: t.$branco;
+
+    @include m.hover {
+      background-color: t.$roxo-escuro;
+      color: t.$branco;
+    }
+  }
+}
+
+.iconeOrcamento {
+  width: t.$icone;
+  height: t.$icone;
+
+  @include m.md {
+    display: none;
+  }
+}
+
+.contador {
+  @include m.texto(sm);
+  font-weight: t.$peso-semibold;
+
+  @include m.md {
+    display: none;
+  }
+}
+
+.textoOrcamento {
+  display: none;
+  font-size: t.$texto-medio;
+
+  @include m.md {
+    display: inline;
+  }
+}
+
+// Navegação do desktop (no celular, fica no MobileMenu).
+.nav {
+  @include m.container;
+  display: none;
+  padding-inline: t.espaco(8);
+
+  @include m.md {
+    display: block;
+  }
+}

@@ -1,0 +1,176 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: t.$fundo;
+
+  @include m.lg {
+    display: block;
+    min-height: 340px;
+  }
+}
+
+// Texto: vem antes no DOM (ordem de leitura).
+.conteudo {
+  @include m.container;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: t.espaco(2) t.espaco(4) t.espaco(8);
+
+  @include m.md {
+    padding-inline: t.espaco(8);
+  }
+
+  @include m.lg {
+    padding-block: t.espaco(12);
+  }
+}
+
+.texto {
+  @include m.lg {
+    max-width: 46%;
+  }
+}
+
+.selo {
+  @include m.texto(xs);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: t.$texto-suave;
+}
+
+.titulo {
+  margin-top: t.espaco(3);
+  font-family: t.$fonte-serif;
+  font-size: 2rem;
+  line-height: 1.12;
+  color: t.$texto;
+
+  @include m.sm {
+    font-size: 2.25rem;
+  }
+
+  // Entre 1024 e ~1100px o título encolhe com a tela para não invadir a foto;
+  // acima disso fica em 2.75rem (igual ao 1280+).
+  @include m.lg {
+    font-size: min(2.75rem, 4vw);
+  }
+}
+
+.subtitulo {
+  @include m.texto(base);
+  margin-top: t.espaco(3);
+  color: t.$texto-suave;
+
+  @include m.lg {
+    font-size: t.$texto-medio;
+  }
+}
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: t.espaco(4);
+  margin-top: t.espaco(6);
+
+  @include m.sm {
+    flex-direction: row;
+    align-items: center;
+    gap: t.espaco(6);
+  }
+}
+
+.botao {
+  @include m.texto(lg);
+  @include m.transicao-cores;
+  display: inline-flex;
+  align-items: center;
+  min-height: t.$alvo-toque;
+  padding: t.espaco(2.5) t.espaco(7);
+  border-radius: t.$raio-md;
+  background-color: t.$roxo;
+  color: t.$branco;
+
+  @include m.hover {
+    background-color: t.$roxo-escuro;
+  }
+}
+
+// Alvo de toque de 44px de altura sem mudar o texto.
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: t.$alvo-toque;
+  font-size: t.$texto-apoio;
+  color: t.$roxo;
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+
+  @include m.hover {
+    color: t.$roxo-escuro;
+  }
+}
+
+// Foto: capa acima do texto no celular e tablet; à direita, com degradê, a partir de lg.
+.midia {
+  position: relative;
+  order: -9999;
+  width: 100%;
+  aspect-ratio: 564 / 296;
+
+  @include m.md {
+    aspect-ratio: 12 / 5;
+  }
+
+  @include m.lg {
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    width: 56%;
+    aspect-ratio: auto;
+  }
+}
+
+.foto {
+  object-fit: cover;
+  object-position: 50% 45%;
+
+  @include m.lg {
+    object-position: 55% 50%;
+  }
+}
+
+// Degradê à esquerda da foto (só desktop).
+.degradeLateral {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  display: none;
+  width: 33.3333%;
+  background-image: linear-gradient(to right, t.$fundo 0%, transparent 100%);
+  background-image: linear-gradient(to right in oklab, t.$fundo 0%, transparent 100%);
+
+  @include m.lg {
+    display: block;
+  }
+}
+
+// Degradê na base da foto (celular e tablet).
+.degradeInferior {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 33.3333%;
+  background-image: linear-gradient(to top, t.$fundo 0%, transparent 100%);
+  background-image: linear-gradient(to top in oklab, t.$fundo 0%, transparent 100%);
+
+  @include m.lg {
+    display: none;
+  }
+}
