@@ -9,6 +9,7 @@ export const rotas = {
   mesaPosta: "/mesa-posta",
   cozinha: "/cozinha",
   sobre: "/sobre",
+  catalogo: "/catalogo",
 } as const;
 
 export const mainNavigation: NavItem[] = [

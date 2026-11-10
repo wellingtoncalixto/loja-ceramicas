@@ -1,6 +1,7 @@
 import { Categorias } from "@/components/home/Categorias/Categorias";
 import { ComoMontar } from "@/components/home/ComoMontar/ComoMontar";
 import { Hero } from "@/components/home/Hero/Hero";
+import { Inspiracao } from "@/components/home/Inspiracao/Inspiracao";
 import styles from "./page.module.scss";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
       <Hero />
       <Categorias />
       <ComoMontar />
+      <Inspiracao />
     </main>
   );
 }

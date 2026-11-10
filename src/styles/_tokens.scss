@@ -46,6 +46,10 @@ $espessura-borda: 1px; // bordas e divisores finos
 $espessura-destaque: 2px; // marcador da aba ativa e contorno de foco
 $sombra-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); // cards em repouso
 $sombra-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+// Hover dos cards com foto: sombra cresce e a foto aproxima levemente.
+$duracao-sombra: 0.2s;
+$duracao-zoom: 0.3s;
+$zoom-foto: 1.03;
 
 // Breakpoints (mobile first: o estilo base é o do celular).
 $bp-sm: 40rem; // 640px
