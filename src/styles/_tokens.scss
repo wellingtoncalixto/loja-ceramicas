@@ -27,6 +27,8 @@ $peso-semibold: 600;
 // Tamanhos avulsos fora da escala, usados em mais de um componente.
 $texto-medio: 1.0625rem; // 17px: subtítulo do Hero (desktop), menu e botão de orçamento
 $texto-apoio: 0.95rem; // ~15px: link secundário do Hero e localização do header
+$titulo-secao: 1.5rem; // 24px: títulos h2 das seções da home (celular)
+$titulo-secao-lg: 1.875rem; // 30px: títulos h2 das seções da home (desktop)
 
 // Espaçamento: espaco(4) = 1rem.
 @function espaco($n) {
@@ -42,6 +44,7 @@ $alvo-toque: espaco(11); // 44px
 $icone: 22px; // ícones do header (busca e orçamento)
 $espessura-borda: 1px; // bordas e divisores finos
 $espessura-destaque: 2px; // marcador da aba ativa e contorno de foco
+$sombra-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); // cards em repouso
 $sombra-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 
 // Breakpoints (mobile first: o estilo base é o do celular).

@@ -42,8 +42,6 @@
     flex-direction: column;
     min-height: 100%;
     font-family: t.$fonte-sans;
-    background: var(--color-fundo);
-    color: var(--color-texto);
   }
 
   h1,
@@ -106,6 +104,14 @@
   [hidden]:where(:not([hidden="until-found"])) {
     display: none !important;
   }
+}
+
+// Fundo e cor do body fora da camada e com prioridade maior que "body":
+// estilos externos sem camada (ex.: o 404 padrão do Next com
+// prefers-color-scheme: dark) não conseguem trocar o fundo do site.
+:root body {
+  background-color: var(--color-fundo);
+  color: var(--color-texto);
 }
 
 // Foco visível para teclado. ":root" aumenta a prioridade para valer
