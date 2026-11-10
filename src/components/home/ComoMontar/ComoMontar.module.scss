@@ -1,0 +1,180 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+// Só para esta seção: 1024–1280px já aprovados ficam como estão.
+$acima-de-1280: 80.0625rem;
+
+// Faixa creme de ponta a ponta, como na referência.
+.comoMontar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: t.$creme;
+
+  // A partir do tablet a foto fica por trás, à direita.
+  @include m.md {
+    display: block;
+  }
+}
+
+.conteudo {
+  @include m.container;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  // Celular: sem foto, espaço igual em cima e embaixo.
+  padding: t.espaco(8) t.espaco(4);
+
+  // Tablet: espaço igual em cima e embaixo.
+  @include m.md {
+    padding-inline: t.espaco(8);
+  }
+
+  @include m.lg {
+    padding-block: t.espaco(7);
+  }
+}
+
+// A partir do tablet o texto ocupa a parte esquerda; a foto fica por trás, à direita.
+.texto {
+  @include m.md {
+    max-width: 56%;
+  }
+
+  @include m.lg {
+    max-width: 66%;
+  }
+}
+
+.titulo {
+  font-family: t.$fonte-serif;
+  font-size: t.$titulo-secao;
+  line-height: 1.2;
+  color: t.$texto;
+  text-wrap: balance;
+
+  @include m.lg {
+    font-size: t.$titulo-secao-lg;
+  }
+}
+
+// Mobile first: passos empilhados (também no tablet); em linha com divisores a partir de lg.
+.passos {
+  display: flex;
+  flex-direction: column;
+  gap: t.espaco(4);
+  margin-top: t.espaco(5);
+  list-style: none;
+
+  @include m.md {
+    align-items: flex-start;
+  }
+
+  @include m.lg {
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    // Largura natural: em 1024px evita quebrar "Escolha as peças" e "Converse com a loja"
+    // (a linha avança um pouco sobre a parte esmaecida da foto).
+    width: max-content;
+  }
+}
+
+.passo {
+  display: flex;
+  align-items: center;
+  gap: t.espaco(4);
+
+  @include m.lg {
+    padding-inline: t.espaco(6);
+    border-left: t.$espessura-borda solid t.$borda;
+
+    &:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+}
+
+.numero {
+  flex-shrink: 0;
+  min-width: 2ch;
+  font-family: t.$fonte-serif;
+  font-size: t.$titulo-secao;
+  line-height: 1;
+  color: t.$lavanda;
+}
+
+.nomePasso {
+  @include m.texto(base);
+  color: t.$texto;
+
+  // Nomes longos quebram em duas linhas (como na referência), sem alargar a faixa.
+  @include m.lg {
+    max-width: 9.5rem;
+    font-size: t.$texto-medio;
+    line-height: 1.25;
+  }
+}
+
+.nota {
+  @include m.texto(sm);
+  margin-top: t.espaco(6);
+  color: t.$texto-suave;
+
+  @include m.lg {
+    font-size: t.$texto-apoio;
+  }
+}
+
+// Foto: escondida no celular (decisão do usuário); à direita, com degradê lateral,
+// a partir do tablet (mais larga no tablet).
+.midia {
+  display: none;
+
+  @include m.md {
+    display: block;
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    width: 46%;
+  }
+
+  @include m.lg {
+    width: 38%;
+  }
+
+  // Telas largas: limita a largura para a foto não ampliar demais e cortar os passarinhos.
+  @media (min-width: $acima-de-1280) {
+    width: min(38%, 46rem);
+  }
+}
+
+.foto {
+  object-fit: cover;
+  // Tablet (no celular a foto não aparece): passarinhos das tampas inteiros.
+  object-position: 35% 10%;
+
+  @include m.lg {
+    object-position: 40% 35%;
+  }
+
+  // Acima de 1280px a faixa fica baixa e larga: enquadra o topo (passarinhos inteiros).
+  @media (min-width: $acima-de-1280) {
+    object-position: 40% 3%;
+  }
+}
+
+.degrade {
+  position: absolute;
+  inset-inline: 0 auto;
+  inset-block: 0;
+  width: 40%;
+  background-image: linear-gradient(to right, t.$creme 0%, transparent 100%);
+  background-image: linear-gradient(to right in oklab, t.$creme 0%, transparent 100%);
+
+  @include m.lg {
+    width: 45%;
+  }
+}
