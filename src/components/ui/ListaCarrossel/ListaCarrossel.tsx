@@ -2,17 +2,19 @@
 
 import type { FocusEvent, ReactNode } from "react";
 
-type InspiracaoListaProps = {
+type ListaCarrosselProps = {
   className?: string;
   children: ReactNode;
 };
 
 /**
- * Lista do carrossel de Inspiração. No celular, o Chrome não rola o carrossel
- * quando o card focado pelo Tab já aparece em parte; aqui ele é trazido
- * inteiro para a vista. Sem carrossel (tablet e desktop), não faz nada.
+ * Lista (ul) para carrosséis com rolagem horizontal em CSS.
+ * O Chrome não rola o carrossel quando o item focado pelo Tab já aparece
+ * em parte; aqui ele é trazido inteiro para a vista. Quando a lista não
+ * transborda (ex.: grade no tablet/desktop), não faz nada.
+ * Os filhos devem ser <li>.
  */
-export function InspiracaoLista({ className, children }: InspiracaoListaProps) {
+export function ListaCarrossel({ className, children }: ListaCarrosselProps) {
   function aoFocar(evento: FocusEvent<HTMLUListElement>) {
     const lista = evento.currentTarget;
     if (lista.scrollWidth <= lista.clientWidth) return;

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { InspiracaoLista } from "@/components/home/InspiracaoLista/InspiracaoLista";
+import { ListaCarrossel } from "@/components/ui/ListaCarrossel/ListaCarrossel";
 import { inspiracoes } from "@/data/inspiracoes";
 import styles from "./Inspiracao.module.scss";
 
@@ -14,7 +14,7 @@ export function Inspiracao() {
         Inspire a sua composição
       </h2>
 
-      <InspiracaoLista className={styles.grade}>
+      <ListaCarrossel className={styles.grade}>
         {inspiracoes.map((item) => (
           <li key={item.nome} className={styles.item}>
             {/* Um único link por card (nome + "Ver peças"). O texto vem antes
@@ -37,7 +37,7 @@ export function Inspiracao() {
             </Link>
           </li>
         ))}
-      </InspiracaoLista>
+      </ListaCarrossel>
     </section>
   );
 }
