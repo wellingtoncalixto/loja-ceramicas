@@ -1,0 +1,184 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+.catalogo {
+  display: flex;
+  flex-direction: column;
+  gap: t.espaco(6);
+
+  @include m.lg {
+    gap: t.espaco(10);
+  }
+}
+
+// Celular/tablet: botão "Filtrar", painel (quando aberto) e resultados empilhados.
+// Desktop: filtros à esquerda e resultados à direita.
+.corpo {
+  display: flex;
+  flex-direction: column;
+  gap: t.espaco(4);
+
+  @include m.lg {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    align-items: start;
+    gap: t.espaco(6);
+  }
+}
+
+.barraFiltros {
+  @include m.lg {
+    display: none;
+  }
+}
+
+.botaoFiltrar {
+  @include m.texto(base);
+  @include m.transicao-cores;
+  display: inline-flex;
+  align-items: center;
+  gap: t.espaco(2);
+  min-height: t.$alvo-toque;
+  padding: t.espaco(2) t.espaco(5);
+  border: t.$espessura-borda solid t.$roxo;
+  border-radius: t.$raio-md;
+  background-color: t.$branco;
+  color: t.$roxo;
+  cursor: pointer;
+
+  &[aria-expanded="true"] {
+    background-color: t.$roxo;
+    color: t.$branco;
+  }
+}
+
+.selo {
+  @include m.texto(xs);
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding-inline: t.espaco(1);
+  border-radius: t.$raio-redondo;
+  background-color: t.$roxo;
+  color: t.$branco;
+  font-weight: t.$peso-semibold;
+
+  .botaoFiltrar[aria-expanded="true"] & {
+    background-color: t.$branco;
+    color: t.$roxo;
+  }
+}
+
+.resultados {
+  min-width: 0;
+}
+
+// Título e contagem à esquerda; ordem à direita.
+.topoResultados {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "titulo titulo"
+    "contagem ordem";
+  align-items: center;
+  gap: t.espaco(1) t.espaco(3);
+
+  @include m.md {
+    grid-template-areas:
+      "titulo ordem"
+      "contagem ordem";
+  }
+}
+
+.titulo {
+  grid-area: titulo;
+  font-family: t.$fonte-serif;
+  font-size: 1.375rem;
+  line-height: 1.25;
+  color: t.$texto;
+
+  // Recebe foco ao fechar o painel de filtros (só contorno se for por teclado).
+  &:focus {
+    outline: none;
+  }
+
+  @include m.lg {
+    font-size: 1.625rem;
+  }
+}
+
+.subtitulo {
+  font-size: 0.75em;
+  color: t.$texto-suave;
+}
+
+.contagem {
+  @include m.texto(sm);
+  grid-area: contagem;
+  color: t.$texto-suave;
+}
+
+.ordem {
+  grid-area: ordem;
+}
+
+.selecao {
+  @include m.texto(base);
+  min-height: t.$alvo-toque;
+  padding: t.espaco(2) t.espaco(3);
+  border: t.$espessura-borda solid t.$borda-campo;
+  border-radius: t.$raio-md;
+  background-color: t.$branco;
+  cursor: pointer;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: t.espaco(6) t.espaco(3);
+  margin-top: t.espaco(5);
+
+  @include m.sm {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: t.espaco(8) t.espaco(5);
+  }
+}
+
+.vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: t.espaco(2);
+  margin-top: t.espaco(5);
+  padding: t.espaco(6);
+  border: t.$espessura-borda dashed t.$borda-campo;
+  border-radius: t.$raio-md;
+  color: t.$texto-suave;
+}
+
+.vazioTitulo {
+  font-family: t.$fonte-serif;
+  font-size: 1.25rem;
+  color: t.$texto;
+}
+
+.vazioBotao {
+  @include m.texto(base);
+  @include m.transicao-cores;
+  min-height: t.$alvo-toque;
+  margin-top: t.espaco(2);
+  padding: t.espaco(2) t.espaco(5);
+  border-radius: t.$raio-md;
+  background-color: t.$roxo;
+  color: t.$branco;
+  cursor: pointer;
+
+  @include m.hover {
+    background-color: t.$roxo-escuro;
+  }
+}
+
+.oculto {
+  @include m.so-leitor-de-tela;
+}

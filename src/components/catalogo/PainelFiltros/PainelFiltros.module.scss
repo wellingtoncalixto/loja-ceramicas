@@ -1,0 +1,180 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+// Celular/tablet: escondido até o botão "Filtrar" abrir. Desktop: sempre visível.
+.painel {
+  display: none;
+  padding: t.espaco(4);
+  border: t.$espessura-borda solid t.$borda;
+  border-radius: t.$raio-md;
+  background-color: t.$creme;
+
+  &[data-aberto] {
+    display: block;
+  }
+
+  @include m.lg {
+    display: block;
+    padding: 0 t.espaco(5) 0 0;
+    border: 0;
+    border-right: t.$espessura-borda solid t.$borda;
+    border-radius: 0;
+    background-color: transparent;
+  }
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: t.espaco(3);
+  padding-bottom: t.espaco(2);
+  border-bottom: t.$espessura-borda solid t.$borda;
+}
+
+.titulo {
+  font-family: t.$fonte-serif;
+  font-size: 1.375rem;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.limpar {
+  @include m.texto(sm);
+  white-space: nowrap;
+  @include m.transicao-cores;
+  min-height: t.$alvo-toque;
+  padding-inline: t.espaco(1);
+  color: t.$roxo;
+  text-decoration-line: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+
+  @include m.hover {
+    color: t.$roxo-escuro;
+  }
+
+  &:disabled {
+    color: t.$texto-suave;
+    text-decoration-line: none;
+    cursor: default;
+  }
+}
+
+.grupo {
+  padding-block: t.espaco(4) t.espaco(3);
+  border-bottom: t.$espessura-borda solid t.$borda;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+}
+
+.legenda {
+  margin-bottom: t.espaco(1);
+  font-family: t.$fonte-serif;
+  font-size: 1.1875rem;
+  line-height: 1.3;
+  color: t.$texto;
+}
+
+// Celular: 2 colunas de opções (alvo de 44px). Desktop: lista simples.
+.opcoes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: t.espaco(3);
+
+  @include m.lg {
+    grid-template-columns: 1fr;
+  }
+
+  li {
+    position: relative;
+  }
+}
+
+// O checkbox nativo fica sobre a área do rótulo (ícone visível à esquerda).
+.checkbox {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: t.$roxo;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.opcao {
+  @include m.texto(base);
+  display: flex;
+  align-items: center;
+  gap: t.espaco(3);
+  min-height: t.$alvo-toque;
+  padding-left: t.espaco(8);
+  color: t.$texto;
+  cursor: pointer;
+
+  @include m.lg {
+    min-height: t.espaco(8);
+  }
+}
+
+// Cores: checkbox escondido; a amostra mostra o estado (borda roxa + ✓).
+.checkboxCor {
+  @include m.so-leitor-de-tela;
+
+  + .opcao {
+    padding-left: 0;
+  }
+}
+
+.amostra {
+  position: relative;
+  flex-shrink: 0;
+  width: 32px;
+  height: 24px;
+  border: t.$espessura-borda solid t.$borda-campo;
+  border-radius: t.$raio;
+
+  .checkboxCor:checked + .opcao & {
+    border: t.$espessura-destaque solid t.$roxo;
+
+    &::after {
+      content: "✓";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 0.875rem;
+      font-weight: t.$peso-semibold;
+      color: t.$roxo-escuro;
+    }
+  }
+
+  .checkboxCor:focus-visible + .opcao & {
+    outline: t.$espessura-destaque solid t.$roxo;
+    outline-offset: 3px;
+  }
+}
+
+.verResultados {
+  @include m.texto(base);
+  @include m.transicao-cores;
+  width: 100%;
+  min-height: t.$alvo-toque;
+  margin-top: t.espaco(2);
+  border-radius: t.$raio-md;
+  background-color: t.$roxo;
+  color: t.$branco;
+  cursor: pointer;
+
+  @include m.hover {
+    background-color: t.$roxo-escuro;
+  }
+
+  @include m.lg {
+    display: none;
+  }
+}

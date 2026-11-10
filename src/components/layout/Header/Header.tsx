@@ -2,13 +2,13 @@ import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { mainNavigation, storeLocation } from "@/data/navigation";
-import { BagIcon, PinIcon, SearchIcon } from "@/components/icons/icons";
+import { PinIcon, SearchIcon } from "@/components/icons/icons";
+import { BotaoOrcamento } from "@/components/layout/BotaoOrcamento/BotaoOrcamento";
 import { MobileMenu } from "@/components/layout/MobileMenu/MobileMenu";
-import { NavLinks } from "@/components/layout/NavLinks/NavLinks";
-import { NavList } from "@/components/layout/NavList/NavList";
+import { NavLinks, NavLinksPorCaminho } from "@/components/layout/NavLinks/NavLinks";
 import styles from "./Header.module.scss";
 
-/** Header comum a todas as páginas. Só a nav e o menu móvel são Client Components. */
+/** Header comum a todas as páginas. Só a nav, o menu móvel e o botão do orçamento são Client Components. */
 export function Header() {
   return (
     <header className={styles.header}>
@@ -46,24 +46,12 @@ export function Header() {
             <SearchIcon className={styles.icone} />
           </button>
           <span aria-hidden="true" className={styles.divisor} />
-          <Link
-            href="/orcamento"
-            aria-label="Meu orçamento, 0 itens"
-            className={styles.orcamento}
-          >
-            <BagIcon className={styles.iconeOrcamento} />
-            <span aria-hidden="true" className={styles.contador}>
-              0
-            </span>
-            <span aria-hidden="true" className={styles.textoOrcamento}>
-              Meu orçamento (0)
-            </span>
-          </Link>
+          <BotaoOrcamento />
         </div>
       </div>
 
       <nav aria-label="Principal" className={styles.nav}>
-        <Suspense fallback={<NavList items={mainNavigation} variant="desktop" />}>
+        <Suspense fallback={<NavLinksPorCaminho items={mainNavigation} variant="desktop" />}>
           <NavLinks items={mainNavigation} variant="desktop" />
         </Suspense>
       </nav>

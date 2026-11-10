@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lora, Source_Sans_3 } from "next/font/google";
 import "./globals.scss";
+import { Footer } from "@/components/layout/Footer/Footer";
 import { Header } from "@/components/layout/Header/Header";
 
 const lora = Lora({
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

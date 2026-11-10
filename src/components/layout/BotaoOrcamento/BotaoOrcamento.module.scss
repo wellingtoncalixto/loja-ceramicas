@@ -1,0 +1,57 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+// Orçamento: ícone + número no celular; botão roxo a partir de md.
+.orcamento {
+  display: flex;
+  align-items: center;
+  gap: t.espaco(1.5);
+  height: t.$alvo-toque;
+  padding-inline: t.espaco(2);
+  border-radius: t.$raio-md;
+  color: t.$roxo;
+
+  @include m.hover {
+    color: t.$roxo-escuro;
+  }
+
+  @include m.md {
+    padding-inline: t.espaco(4);
+    background-color: t.$roxo;
+    color: t.$branco;
+
+    @include m.hover {
+      background-color: t.$roxo-escuro;
+      color: t.$branco;
+    }
+  }
+}
+
+.icone {
+  width: t.$icone;
+  height: t.$icone;
+
+  @include m.md {
+    display: none;
+  }
+}
+
+.contador {
+  @include m.texto(sm);
+  font-weight: t.$peso-semibold;
+  font-variant-numeric: tabular-nums;
+
+  @include m.md {
+    display: none;
+  }
+}
+
+.texto {
+  display: none;
+  font-size: t.$texto-medio;
+  font-variant-numeric: tabular-nums;
+
+  @include m.md {
+    display: inline;
+  }
+}

@@ -1,0 +1,124 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+.porcelanas {
+  @include m.container;
+  width: 100%;
+  padding-bottom: t.espaco(8);
+
+  @include m.md {
+    padding-inline: t.espaco(8);
+  }
+}
+
+// Celular: foto em cima (de ponta a ponta) e texto embaixo.
+// A partir do tablet: foto à esquerda com degradê para a direita, texto à direita.
+.faixa {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @include m.md {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    min-height: 13rem;
+  }
+
+  @include m.lg {
+    min-height: 15rem;
+  }
+}
+
+.texto {
+  padding: t.espaco(2) t.espaco(4) 0;
+
+  @include m.md {
+    grid-column: 2;
+    padding: t.espaco(6) 0 t.espaco(6) t.espaco(6);
+  }
+
+  @include m.lg {
+    padding-left: t.espaco(4);
+  }
+}
+
+.titulo {
+  font-family: t.$fonte-serif;
+  font-size: t.$titulo-secao;
+  line-height: 1.2;
+  color: t.$texto;
+  text-wrap: balance;
+
+  @include m.lg {
+    font-size: t.$titulo-secao-lg;
+  }
+}
+
+.descricao {
+  @include m.texto(base);
+  margin-top: t.espaco(2);
+  color: t.$texto-suave;
+
+  @include m.lg {
+    font-size: t.$texto-medio;
+  }
+}
+
+// Mesmo estilo do link secundário do Hero; alvo de toque de 44px.
+.link {
+  @include m.transicao-cores;
+  display: inline-flex;
+  align-items: center;
+  min-height: t.$alvo-toque;
+  margin-top: t.espaco(1);
+  font-size: t.$texto-medio;
+  color: t.$roxo;
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+
+  @include m.hover {
+    color: t.$roxo-escuro;
+  }
+}
+
+.midia {
+  position: relative;
+  order: -1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  @include m.md {
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 50%;
+    aspect-ratio: auto;
+  }
+}
+
+// Enquadra a rosa da tampa inteira (topo da foto).
+.foto {
+  object-fit: cover;
+  object-position: 50% 15%;
+}
+
+// Celular: degradê na base, ligando a foto ao texto.
+// A partir do tablet: degradê na lateral direita, como na referência.
+.degrade {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 30%;
+  background-image: linear-gradient(to top, t.$fundo 0%, transparent 100%);
+  background-image: linear-gradient(to top in oklab, t.$fundo 0%, transparent 100%);
+
+  @include m.md {
+    inset-block: 0;
+    inset-inline: auto 0;
+    width: 40%;
+    height: auto;
+    background-image: linear-gradient(to left, t.$fundo 0%, transparent 100%);
+    background-image: linear-gradient(to left in oklab, t.$fundo 0%, transparent 100%);
+  }
+}

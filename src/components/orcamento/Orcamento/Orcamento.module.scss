@@ -1,0 +1,146 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+// Celular: lista, observações e resumo empilhados.
+// Desktop: lista à esquerda e resumo fixo à direita.
+.grade {
+  display: grid;
+  gap: t.espaco(6);
+
+  @include m.lg {
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    gap: t.espaco(8);
+    align-items: start;
+  }
+}
+
+.principal {
+  min-width: 0;
+}
+
+.lista {
+  border-top: t.$espessura-borda solid t.$borda;
+
+  @include m.lg {
+    border-top: 0;
+  }
+}
+
+.lateral {
+  @include m.lg {
+    position: sticky;
+    top: t.espaco(6);
+  }
+}
+
+.acoesLista {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: t.espaco(2) t.espaco(4);
+  margin-top: t.espaco(1);
+}
+
+.link,
+.limpar {
+  @include m.texto(base);
+  @include m.transicao-cores;
+  display: inline-flex;
+  align-items: center;
+  min-height: t.$alvo-toque;
+  color: t.$roxo;
+  text-decoration-line: underline;
+  text-underline-offset: 3px;
+
+  @include m.hover {
+    color: t.$roxo-escuro;
+  }
+}
+
+.limpar {
+  @include m.texto(sm);
+  color: t.$texto-suave;
+  cursor: pointer;
+}
+
+.observacoes {
+  margin-top: t.espaco(3);
+}
+
+.rotulo {
+  @include m.texto(base);
+  display: block;
+  font-weight: t.$peso-semibold;
+  color: t.$texto;
+}
+
+.campo {
+  @include m.texto(base);
+  display: block;
+  width: 100%;
+  min-height: t.espaco(16);
+  margin-top: t.espaco(2);
+  padding: t.espaco(2) t.espaco(3);
+  border: t.$espessura-borda solid t.$borda-campo;
+  border-radius: t.$raio-md;
+  resize: vertical;
+
+  &::placeholder {
+    color: t.$texto-suave;
+  }
+}
+
+.carregando {
+  @include m.texto(base);
+  min-height: t.espaco(40);
+  color: t.$texto-suave;
+}
+
+.vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: t.espaco(3);
+  padding: t.espaco(6) t.espaco(4);
+  border: t.$espessura-borda solid t.$borda;
+  border-radius: t.$raio-md;
+  background-color: t.$creme;
+
+  @include m.md {
+    padding: t.espaco(8);
+  }
+}
+
+.vazioTitulo {
+  font-family: t.$fonte-serif;
+  font-size: t.$titulo-secao;
+  line-height: 1.2;
+  color: t.$texto;
+}
+
+.vazioTexto {
+  @include m.texto(base);
+  color: t.$texto-suave;
+}
+
+.botaoCatalogo {
+  @include m.texto(base);
+  @include m.transicao-cores;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: t.$alvo-toque;
+  padding: t.espaco(2) t.espaco(8);
+  border-radius: t.$raio-md;
+  background-color: t.$roxo;
+  color: t.$branco;
+
+  @include m.hover {
+    background-color: t.$roxo-escuro;
+  }
+}
+
+.oculto {
+  @include m.so-leitor-de-tela;
+}

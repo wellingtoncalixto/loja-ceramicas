@@ -1,15 +1,28 @@
+import type { CategoriaSlug } from "@/types/produto";
 import type { NavItem } from "@/types/navigation";
 
-// Rotas placeholder: as páginas serão criadas em etapas futuras.
-// Fonte única dos caminhos, usada pela navegação e pelas categorias da home.
+/** Catálogo já filtrado por uma categoria (ex.: /catalogo?categoria=lavabo). */
+export function rotaCategoria(categoria: CategoriaSlug): string {
+  return `/catalogo?categoria=${categoria}`;
+}
+
+/** Página de uma peça (ex.: /produto/pote-ovelhinhas). */
+export function rotaProduto(slug: string): string {
+  return `/produto/${encodeURIComponent(slug)}`;
+}
+
+// Fonte única dos caminhos, usada pela navegação, rodapé e seções da home.
+// As categorias abrem o catálogo com o filtro marcado.
 export const rotas = {
   inicio: "/",
-  kitsParaBebe: "/kits-para-bebe",
-  lavabo: "/lavabo",
-  mesaPosta: "/mesa-posta",
-  cozinha: "/cozinha",
-  sobre: "/sobre",
   catalogo: "/catalogo",
+  kitsParaBebe: rotaCategoria("kits-para-bebe"),
+  lavabo: rotaCategoria("lavabo"),
+  mesaPosta: rotaCategoria("mesa-posta"),
+  cozinha: rotaCategoria("cozinha"),
+  orcamento: "/orcamento",
+  // Placeholder: página ainda não criada (cai na "em construção").
+  sobre: "/sobre",
 } as const;
 
 export const mainNavigation: NavItem[] = [

@@ -3,8 +3,7 @@
 import { Suspense, useEffect, useId, useRef, useState } from "react";
 import type { NavItem } from "@/types/navigation";
 import { CloseIcon, MenuIcon, PinIcon } from "@/components/icons/icons";
-import { NavLinks } from "@/components/layout/NavLinks/NavLinks";
-import { NavList } from "@/components/layout/NavList/NavList";
+import { NavLinks, NavLinksPorCaminho } from "@/components/layout/NavLinks/NavLinks";
 import styles from "./MobileMenu.module.scss";
 
 type MobileMenuProps = {
@@ -57,7 +56,7 @@ export function MobileMenu({ items, location }: MobileMenuProps) {
         className={styles.painel}
       >
         <Suspense
-          fallback={<NavList items={items} variant="mobile" onNavigate={close} />}
+          fallback={<NavLinksPorCaminho items={items} variant="mobile" onNavigate={close} />}
         >
           <NavLinks items={items} variant="mobile" onNavigate={close} />
         </Suspense>

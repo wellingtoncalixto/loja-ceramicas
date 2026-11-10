@@ -1,6 +1,6 @@
 // Mesma linguagem visual do Hero (selo, título serifado, botão roxo).
-@use "../styles/tokens" as t;
-@use "../styles/mixins" as m;
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
 
 .conteudo {
   flex: 1;

@@ -1,0 +1,98 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+.galeria {
+  min-width: 0;
+}
+
+.principal {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  border-radius: t.$raio-md;
+  background-color: t.$creme;
+  box-shadow: t.$sombra-sm;
+}
+
+.foto {
+  object-fit: cover;
+}
+
+.legenda {
+  @include m.texto(xs);
+  margin-top: t.espaco(2);
+  font-family: t.$fonte-serif;
+  font-style: italic;
+  color: t.$texto-suave;
+}
+
+.miniaturas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: t.espaco(2);
+  margin-top: t.espaco(3);
+
+  @include m.lg {
+    gap: t.espaco(3);
+  }
+}
+
+.miniatura {
+  @include m.transicao-cores;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border-radius: t.$raio-md;
+  color: t.$texto;
+  cursor: pointer;
+
+  @include m.hover {
+    .midia {
+      border-color: t.$borda-campo;
+    }
+  }
+
+  // Selecionada: borda roxa na foto e rótulo sublinhado, como na referência.
+  &[aria-pressed="true"] {
+    .midia {
+      border-color: t.$roxo;
+    }
+
+    .rotulo {
+      border-bottom-color: t.$roxo;
+      color: t.$roxo;
+    }
+  }
+}
+
+.midia {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: t.$espessura-destaque solid transparent;
+  border-radius: t.$raio-md;
+  background-color: t.$creme;
+}
+
+.fotoMiniatura {
+  object-fit: cover;
+}
+
+// Altura mínima: foto + rótulo passam de 44px de alvo de toque.
+.rotulo {
+  @include m.texto(sm);
+  display: inline-flex;
+  align-items: center;
+  min-height: t.espaco(8);
+  margin-top: t.espaco(1);
+  padding-inline: t.espaco(2);
+  border-bottom: t.$espessura-destaque solid transparent;
+  text-align: center;
+}
+
+.oculto {
+  @include m.so-leitor-de-tela;
+}

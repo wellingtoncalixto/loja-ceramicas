@@ -1,0 +1,52 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+.complete {
+  margin-top: t.espaco(10);
+  padding-top: t.espaco(6);
+  border-top: t.$espessura-borda solid t.$borda;
+}
+
+.titulo {
+  font-family: t.$fonte-serif;
+  font-size: t.$titulo-secao;
+  line-height: 1.2;
+  color: t.$texto;
+  text-wrap: balance;
+
+  @include m.lg {
+    font-size: t.$titulo-secao-lg;
+  }
+}
+
+// Celular: carrossel horizontal em CSS (mesmo padrão da home), com o próximo
+// card aparecendo na borda. Tablet/desktop: 3 colunas, como na referência.
+.grade {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 70%;
+  gap: t.espaco(4);
+  margin: t.espaco(3) (-(t.espaco(4))) 0;
+  // Folga para a sombra e o contorno de foco não serem cortados pelo overflow.
+  padding: t.espaco(2) t.espaco(4);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: t.espaco(4);
+
+  @include m.md {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: t.espaco(5);
+    margin: t.espaco(5) 0 0;
+    padding: 0;
+    overflow: visible;
+  }
+}
+
+// position: o aviso oculto do botão (position: absolute) fica preso ao card,
+// dentro da área que rola; sem isso a página ganha rolagem horizontal.
+.item {
+  position: relative;
+  scroll-snap-align: start;
+}

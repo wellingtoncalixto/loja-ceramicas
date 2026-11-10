@@ -1,0 +1,63 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+.abas {
+  margin-top: t.espaco(10);
+
+  @include m.lg {
+    margin-top: t.espaco(12);
+  }
+}
+
+// Celular: três colunas iguais (o texto pode quebrar em duas linhas).
+// Desktop: abas largas alinhadas à esquerda, como na referência.
+.lista {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: t.$espessura-borda solid t.$borda;
+
+  @include m.md {
+    grid-template-columns: repeat(3, minmax(0, 13rem));
+  }
+}
+
+.aba {
+  @include m.texto(sm);
+  @include m.transicao-cores;
+  min-height: t.$alvo-toque;
+  margin-bottom: -(t.$espessura-borda);
+  padding: t.espaco(2) t.espaco(1);
+  border-bottom: t.$espessura-destaque solid transparent;
+  color: t.$texto;
+  text-align: center;
+  cursor: pointer;
+
+  @include m.md {
+    @include m.texto(lg);
+    padding-inline: t.espaco(3);
+  }
+
+  @include m.hover {
+    color: t.$roxo;
+  }
+
+  &[aria-selected="true"] {
+    border-bottom-color: t.$roxo;
+    color: t.$roxo;
+    font-weight: t.$peso-semibold;
+  }
+
+  // Foco por dentro para não ser cortado pela linha da lista.
+  &:focus-visible {
+    outline-offset: -3px;
+  }
+}
+
+.painel {
+  padding-top: t.espaco(5);
+  padding-inline: t.espaco(1);
+
+  &:focus-visible {
+    outline-offset: 4px;
+  }
+}

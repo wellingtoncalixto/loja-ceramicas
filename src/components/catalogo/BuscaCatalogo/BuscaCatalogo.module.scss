@@ -1,0 +1,70 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+.busca {
+  display: flex;
+  gap: t.espaco(2);
+
+  @include m.md {
+    gap: t.espaco(4);
+  }
+}
+
+.campo {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.icone {
+  position: absolute;
+  top: 50%;
+  left: t.espaco(3);
+  width: t.$icone;
+  height: t.$icone;
+  color: t.$texto-suave;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.entrada {
+  @include m.texto(base);
+  width: 100%;
+  min-height: t.$alvo-toque;
+  padding: t.espaco(2) t.espaco(3) t.espaco(2) t.espaco(11);
+  border: t.$espessura-borda solid t.$borda-campo;
+  border-radius: t.$raio-md;
+  background-color: t.$branco;
+
+  &::placeholder {
+    color: t.$texto-suave;
+  }
+
+  @include m.md {
+    @include m.texto(lg);
+  }
+}
+
+.botao {
+  @include m.texto(base);
+  @include m.transicao-cores;
+  min-height: t.$alvo-toque;
+  padding: t.espaco(2) t.espaco(4);
+  border-radius: t.$raio-md;
+  background-color: t.$roxo;
+  color: t.$branco;
+  cursor: pointer;
+
+  @include m.hover {
+    background-color: t.$roxo-escuro;
+  }
+
+  @include m.md {
+    @include m.texto(lg);
+    padding-inline: t.espaco(8);
+  }
+}
+
+.oculto {
+  @include m.so-leitor-de-tela;
+}

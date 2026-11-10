@@ -1,0 +1,80 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+.botao {
+  @include m.transicao-cores;
+  display: inline-grid;
+  place-items: center;
+  min-height: t.$alvo-toque;
+  border-radius: t.$raio-md;
+  cursor: pointer;
+}
+
+// Texto e confirmação empilhados na mesma célula da grade.
+.texto,
+.confirmacao {
+  grid-area: 1 / 1;
+}
+
+.confirmacao {
+  visibility: hidden;
+}
+
+.botao[data-adicionado] {
+  .texto {
+    visibility: hidden;
+  }
+
+  .confirmacao {
+    visibility: visible;
+  }
+}
+
+// Card do catálogo: botão com borda.
+.contorno {
+  @include m.texto(sm);
+  padding: t.espaco(1) t.espaco(3);
+  border: t.$espessura-borda solid t.$roxo;
+  color: t.$roxo;
+  background-color: t.$branco;
+
+  @include m.hover {
+    background-color: t.$roxo;
+    color: t.$branco;
+  }
+
+  &[data-adicionado] {
+    background-color: t.$roxo;
+    color: t.$branco;
+  }
+}
+
+// Botão principal ("Adicionar ao orçamento").
+.principal {
+  @include m.texto(lg);
+  width: 100%;
+  padding: t.espaco(2) t.espaco(6);
+  background-color: t.$roxo;
+  color: t.$branco;
+
+  @include m.hover {
+    background-color: t.$roxo-escuro;
+  }
+}
+
+// Link sublinhado ("+ Orçamento" dos relacionados).
+.link {
+  @include m.texto(base);
+  padding-inline: t.espaco(1);
+  color: t.$roxo;
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+
+  @include m.hover {
+    color: t.$roxo-escuro;
+  }
+}
+
+.oculto {
+  @include m.so-leitor-de-tela;
+}

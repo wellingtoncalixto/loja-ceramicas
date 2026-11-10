@@ -1,0 +1,132 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+// margin-top: auto mantém o rodapé no fim da tela em páginas curtas (body é flex coluna).
+.rodape {
+  margin-top: auto;
+  // Sem espaço em cima: a linha do rodapé encosta no conteúdo anterior.
+  padding: 0 t.espaco(4) t.espaco(6);
+  background-color: t.$fundo;
+
+  @include m.md {
+    padding-inline: t.espaco(8);
+  }
+}
+
+// Celular: logo em cima; "Navegue" e "Atendimento" lado a lado.
+// md+: três colunas separadas por linhas finas, como na referência.
+.conteudo {
+  @include m.container;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: t.espaco(6) t.espaco(4);
+  padding-top: t.espaco(8);
+  border-top: t.$espessura-borda solid t.$borda;
+
+  @include m.md {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+}
+
+.marca {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: t.espaco(2);
+
+  @include m.md {
+    grid-column: auto;
+    justify-content: center;
+  }
+}
+
+.logoLink {
+  display: block;
+  border-radius: t.$raio-redondo;
+}
+
+.logo {
+  width: 140px;
+  height: auto;
+
+  @include m.md {
+    width: 160px;
+  }
+}
+
+.localizacao {
+  @include m.texto(sm);
+  display: flex;
+  align-items: center;
+  gap: t.espaco(1.5);
+  color: t.$texto-suave;
+}
+
+.iconeLocalizacao {
+  width: 16px;
+  height: 16px;
+}
+
+.coluna {
+  @include m.md {
+    padding-left: t.espaco(10);
+    border-left: t.$espessura-borda solid t.$borda;
+  }
+}
+
+.titulo {
+  @include m.texto(base);
+  margin-bottom: t.espaco(1);
+  font-weight: t.$peso-semibold;
+  color: t.$texto;
+}
+
+// Alvo de toque de 44px de altura em cada link.
+.link {
+  @include m.texto(sm);
+  @include m.transicao-cores;
+  display: inline-flex;
+  align-items: center;
+  min-height: t.$alvo-toque;
+  color: t.$texto;
+
+  @include m.hover {
+    color: t.$roxo;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+// Aviso da proposta, com linhas finas dos dois lados.
+.aviso {
+  @include m.container;
+  @include m.texto(xs);
+  display: flex;
+  align-items: center;
+  gap: t.espaco(3);
+  margin-top: t.espaco(6);
+  font-family: t.$fonte-serif;
+  font-style: italic;
+  text-align: center;
+  color: t.$texto-suave;
+
+  justify-content: center;
+  text-wrap: balance;
+
+  // Linhas laterais só a partir de md (no celular o texto ocupa a largura toda).
+  @include m.md {
+    &::before,
+    &::after {
+      content: "";
+      flex: 1;
+      height: t.$espessura-borda;
+      background-color: t.$borda;
+    }
+  }
+}
+
+.separador {
+  margin-inline: t.espaco(1);
+}

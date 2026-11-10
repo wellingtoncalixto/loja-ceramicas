@@ -1,0 +1,160 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+.escolha {
+  display: flex;
+  flex-direction: column;
+  gap: t.espaco(5);
+  margin-top: t.espaco(5);
+}
+
+.grupo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: t.espaco(2);
+  min-width: 0;
+  border: 0;
+}
+
+.rotulo {
+  @include m.texto(lg);
+  padding: 0;
+  color: t.$texto;
+}
+
+// Nome da cor escolhida: não depender só da amostra para saber a escolha.
+.valorAtual {
+  color: t.$texto-suave;
+}
+
+.amostras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: t.espaco(3);
+}
+
+// Amostra de 52x48 (alvo de toque > 44px). Escolhida: borda escura grossa.
+.amostra {
+  @include m.transicao-cores;
+  width: t.espaco(13);
+  height: t.espaco(12);
+  border: t.$espessura-borda solid t.$borda-campo;
+  border-radius: t.$raio-md;
+  cursor: pointer;
+
+  @include m.hover {
+    border-color: t.$texto;
+  }
+
+  &[aria-pressed="true"] {
+    border: t.$espessura-destaque solid t.$texto;
+    box-shadow: inset 0 0 0 2px t.$branco;
+  }
+}
+
+.nota {
+  @include m.texto(sm);
+  font-family: t.$fonte-serif;
+  font-style: italic;
+  color: t.$texto-suave;
+}
+
+.selecao {
+  @include m.texto(base);
+  width: 100%;
+  min-height: t.$alvo-toque;
+  padding: t.espaco(2) t.espaco(3);
+  border: t.$espessura-borda solid t.$borda-campo;
+  border-radius: t.$raio-md;
+  background-color: t.$branco;
+  color: t.$texto;
+  cursor: pointer;
+}
+
+.estampaUnica {
+  @include m.texto(base);
+  color: t.$texto-suave;
+}
+
+.quantidade {
+  display: inline-flex;
+  align-items: stretch;
+  border: t.$espessura-borda solid t.$borda-campo;
+  border-radius: t.$raio-md;
+  background-color: t.$branco;
+}
+
+.passo {
+  @include m.texto(lg);
+  @include m.transicao-cores;
+  display: grid;
+  place-items: center;
+  width: t.$alvo-toque;
+  min-height: t.$alvo-toque;
+  border-radius: t.$raio-md;
+  color: t.$texto;
+  cursor: pointer;
+
+  @include m.hover {
+    background-color: t.$creme;
+  }
+
+  &[aria-disabled="true"] {
+    color: t.$borda-campo;
+    background-color: transparent;
+    cursor: not-allowed;
+  }
+}
+
+// Campo numérico sem as setas do navegador (os botões − e + fazem esse papel).
+.campo {
+  @include m.texto(lg);
+  width: t.espaco(12);
+  border-inline: t.$espessura-borda solid t.$borda;
+  text-align: center;
+  color: t.$texto;
+  background-color: transparent;
+  appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    margin: 0;
+    appearance: none;
+  }
+}
+
+.acoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: t.espaco(2);
+}
+
+.consultar {
+  @include m.texto(base);
+  @include m.transicao-cores;
+  display: inline-flex;
+  align-items: center;
+  min-height: t.$alvo-toque;
+  padding-inline: t.espaco(1);
+  color: t.$roxo;
+  text-decoration-line: underline;
+  text-underline-offset: 4px;
+
+  @include m.hover {
+    color: t.$roxo-escuro;
+  }
+}
+
+.aviso {
+  @include m.texto(sm);
+  padding-top: t.espaco(4);
+  border-top: t.$espessura-borda solid t.$borda;
+  color: t.$texto-suave;
+  text-align: center;
+}
+
+.oculto {
+  @include m.so-leitor-de-tela;
+}
