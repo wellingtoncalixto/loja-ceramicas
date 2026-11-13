@@ -4,6 +4,7 @@ import { Suspense, useEffect, useId, useRef, useState } from "react";
 import type { NavItem } from "@/types/navigation";
 import { CloseIcon, MenuIcon, PinIcon } from "@/components/icons/icons";
 import { NavLinks, NavLinksPorCaminho } from "@/components/layout/NavLinks/NavLinks";
+import { MapLink } from "@/components/ui/MapLink/MapLink";
 import styles from "./MobileMenu.module.scss";
 
 type MobileMenuProps = {
@@ -61,8 +62,10 @@ export function MobileMenu({ items, location }: MobileMenuProps) {
           <NavLinks items={items} variant="mobile" onNavigate={close} />
         </Suspense>
         <p className={styles.localizacao}>
-          <PinIcon className={styles.iconeLocalizacao} />
-          {location}
+          <MapLink>
+            <PinIcon className={styles.iconeLocalizacao} />
+            {location}
+          </MapLink>
         </p>
       </nav>
     </div>

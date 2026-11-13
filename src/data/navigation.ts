@@ -1,4 +1,4 @@
-import type { CategoriaSlug } from "@/types/produto";
+import type { CategoriaSlug } from "@/types/product";
 import type { NavItem } from "@/types/navigation";
 
 /** Catálogo já filtrado por uma categoria (ex.: /catalogo?categoria=lavabo). */
@@ -21,7 +21,6 @@ export const rotas = {
   mesaPosta: rotaCategoria("mesa-posta"),
   cozinha: rotaCategoria("cozinha"),
   orcamento: "/orcamento",
-  // Placeholder: página ainda não criada (cai na "em construção").
   sobre: "/sobre",
 } as const;
 
@@ -33,5 +32,3 @@ export const mainNavigation: NavItem[] = [
   { label: "Cozinha", href: rotas.cozinha },
   { label: "Sobre a loja", href: rotas.sobre },
 ];
-
-export const storeLocation = "Pedreira, SP";

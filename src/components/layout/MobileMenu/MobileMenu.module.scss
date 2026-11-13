@@ -45,7 +45,8 @@
   align-items: center;
   gap: t.espaco(2);
   margin-top: t.espaco(2);
-  padding: t.espaco(3) t.espaco(4) t.espaco(2);
+  // O link do Maps dentro já tem 44px de altura (alvo de toque).
+  padding: 0 t.espaco(4);
   border-top: t.$espessura-borda solid t.$borda;
   color: t.$texto-suave;
 }

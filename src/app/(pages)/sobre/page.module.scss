@@ -1,0 +1,40 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+.conteudo {
+  flex: 1;
+}
+
+// Trilha só a partir do tablet (mesmo padrão do orçamento).
+.trilha {
+  @include m.container;
+  display: none;
+  padding-inline: t.espaco(8);
+
+  @include m.md {
+    display: block;
+    padding-top: t.espaco(4);
+  }
+
+  ol {
+    @include m.texto(sm);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    color: t.$texto-suave;
+  }
+
+  li + li::before {
+    content: "/";
+    margin-inline: t.espaco(2);
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: t.$alvo-toque;
+    color: t.$roxo;
+    text-decoration-line: underline;
+    text-underline-offset: 3px;
+  }
+}

@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { rotas, storeLocation } from "@/data/navigation";
-import { rodapeAtendimento, rodapeAviso, rodapeNavegue } from "@/data/rodape";
+import { lojaCidade } from "@/data/store";
+import { rotas } from "@/data/navigation";
+import { rodapeAtendimento, rodapeAviso, rodapeNavegue } from "@/data/footer";
 import { PinIcon } from "@/components/icons/icons";
+import { MapLink } from "@/components/ui/MapLink/MapLink";
 import type { NavItem } from "@/types/navigation";
 import styles from "./Footer.module.scss";
 
@@ -44,8 +46,10 @@ export function Footer() {
             />
           </Link>
           <p className={styles.localizacao}>
-            <PinIcon className={styles.iconeLocalizacao} />
-            {storeLocation}
+            <MapLink>
+              <PinIcon className={styles.iconeLocalizacao} />
+              {lojaCidade}
+            </MapLink>
           </p>
         </div>
 

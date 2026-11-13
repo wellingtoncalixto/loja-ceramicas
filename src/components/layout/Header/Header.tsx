@@ -1,11 +1,13 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { mainNavigation, storeLocation } from "@/data/navigation";
+import { lojaCidade } from "@/data/store";
+import { mainNavigation } from "@/data/navigation";
 import { PinIcon, SearchIcon } from "@/components/icons/icons";
-import { BotaoOrcamento } from "@/components/layout/BotaoOrcamento/BotaoOrcamento";
+import { QuoteButton } from "@/components/layout/QuoteButton/QuoteButton";
 import { MobileMenu } from "@/components/layout/MobileMenu/MobileMenu";
 import { NavLinks, NavLinksPorCaminho } from "@/components/layout/NavLinks/NavLinks";
+import { MapLink } from "@/components/ui/MapLink/MapLink";
 import styles from "./Header.module.scss";
 
 /** Header comum a todas as páginas. Só a nav, o menu móvel e o botão do orçamento são Client Components. */
@@ -19,10 +21,12 @@ export function Header() {
       <div className={styles.barra}>
         {/* Esquerda: menu (celular) / localização (md+) */}
         <div className={styles.esquerda}>
-          <MobileMenu items={mainNavigation} location={storeLocation} />
+          <MobileMenu items={mainNavigation} location={lojaCidade} />
           <p className={styles.localizacao}>
-            <PinIcon className={styles.iconeLocalizacao} />
-            {storeLocation}
+            <MapLink>
+              <PinIcon className={styles.iconeLocalizacao} />
+              {lojaCidade}
+            </MapLink>
           </p>
         </div>
 
@@ -46,7 +50,7 @@ export function Header() {
             <SearchIcon className={styles.icone} />
           </button>
           <span aria-hidden="true" className={styles.divisor} />
-          <BotaoOrcamento />
+          <QuoteButton />
         </div>
       </div>
 

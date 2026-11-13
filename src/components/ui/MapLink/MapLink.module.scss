@@ -1,0 +1,23 @@
+@use "../../../styles/tokens" as t;
+@use "../../../styles/mixins" as m;
+
+// Mantém o visual do texto ao redor (ícone + texto); só ganha sublinhado no hover.
+// "gap: inherit" usa o mesmo espaço entre ícone e texto do elemento pai.
+.link {
+  @include m.transicao-cores;
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+  min-height: t.$alvo-toque;
+  color: inherit;
+  text-underline-offset: 3px;
+
+  @include m.hover {
+    color: t.$roxo;
+    text-decoration-line: underline;
+  }
+}
+
+.oculto {
+  @include m.so-leitor-de-tela;
+}
